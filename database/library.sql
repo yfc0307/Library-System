@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 22, 2025 at 03:42 PM
+-- Generation Time: Feb 23, 2025 at 06:32 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -58,12 +58,20 @@ CREATE TABLE `borrow` (
 
 CREATE TABLE `mail` (
   `mailid` int(11) NOT NULL,
-  `senderid` int(8) NOT NULL,
+  `senderid` int(8) NOT NULL DEFAULT 0,
   `receiverid` int(8) NOT NULL,
   `title` varchar(255) DEFAULT NULL,
-  `context` varchar(10000) NOT NULL,
+  `content` varchar(10000) NOT NULL,
   `mread` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0 for unread, 1 for read'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `mail`
+--
+
+INSERT INTO `mail` (`mailid`, `senderid`, `receiverid`, `title`, `content`, `mread`) VALUES
+(1, 0, 1, 'Mail 1 to jack', 'content of mail 1', 0),
+(2, 0, 1, 'Mail 2 to jack', 'Content of mail 2', 0);
 
 -- --------------------------------------------------------
 
@@ -115,7 +123,8 @@ ALTER TABLE `mail`
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`userid`);
+  ADD PRIMARY KEY (`userid`),
+  ADD UNIQUE KEY `username` (`username`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -137,7 +146,7 @@ ALTER TABLE `borrow`
 -- AUTO_INCREMENT for table `mail`
 --
 ALTER TABLE `mail`
-  MODIFY `mailid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `mailid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`

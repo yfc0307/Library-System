@@ -3,7 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 23, 2025 at 06:32 AM
+-- Generation Time: Feb 23, 2025 at 07:50 AM
+
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -36,6 +37,13 @@ CREATE TABLE `books` (
   `language` varchar(20) NOT NULL DEFAULT 'English'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `books`
+--
+
+INSERT INTO `books` (`bookid`, `name`, `genre`, `author`, `publisher`, `language`) VALUES
+(1, 'Bocchi the Rock!', 'Comic', 'Aki Hamazi', 'Houbunsha', 'English');
+
 -- --------------------------------------------------------
 
 --
@@ -49,6 +57,13 @@ CREATE TABLE `borrow` (
   `rdate` date NOT NULL COMMENT 'return date',
   `bookid` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `borrow`
+--
+
+INSERT INTO `borrow` (`borrowid`, `userid`, `bdate`, `rdate`, `bookid`) VALUES
+(1, 1, '2025-02-23', '2025-03-02', 1);
 
 -- --------------------------------------------------------
 
@@ -70,8 +85,12 @@ CREATE TABLE `mail` (
 --
 
 INSERT INTO `mail` (`mailid`, `senderid`, `receiverid`, `title`, `content`, `mread`) VALUES
-(1, 0, 1, 'Mail 1 to jack', 'content of mail 1', 0),
-(2, 0, 1, 'Mail 2 to jack', 'Content of mail 2', 0);
+(1, 0, 1, 'Mail 1 to jack', 'content of mail 1', 1),
+(2, 0, 1, 'Mail 2 to jack', 'Content of mail 2', 1),
+(3, 0, 1, 'Book Return Reminder', 'Your book no. 1 returning date will expire in 7 days. Please return before 2025-03-02', 1),
+(4, 0, 1, 'Book Return Reminder', 'Your book no. 1 returning date will expire in 7 days. Please return before 2025-03-02', 1),
+(5, 0, 1, 'Book Return Reminder', 'Your book no. 1 returning date will expire in 7 days. Please return before 2025-03-02', 1);
+
 
 -- --------------------------------------------------------
 
@@ -134,19 +153,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `books`
 --
 ALTER TABLE `books`
-  MODIFY `bookid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `bookid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `borrow`
 --
 ALTER TABLE `borrow`
-  MODIFY `borrowid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `borrowid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `mail`
 --
 ALTER TABLE `mail`
-  MODIFY `mailid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `mailid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `users`

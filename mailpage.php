@@ -49,7 +49,7 @@ if($numOfRecord <= 0) {
     <a class="navbar-brand" href="homepage.php">Home</a>
     <?php 
         foreach ($mailid as $id) {
-            $x = $id - 1;
+            $x = count($mailid) - $id;
 
             echo'<ul class="list-group">';
             echo "<b>Mail ID: </b>" ."<li class='list-group-item col-md-6'>". $mailid[$x] ."</li>". "<br>";
@@ -57,6 +57,8 @@ if($numOfRecord <= 0) {
             echo "<b>Title: </b>" ."<li class='list-group-item col-md-6'>". $title[$x] ."</li>". "<br>";
             echo "<b>Content: </b>" ."<li class='list-group-item col-md-6'>". $content[$x] ."</li>". "<br>";
             echo'</ul>';
+
+            // (count($mailid) - $id) to show latest mail
 
             if ($mread[$x] == 0) {
                 echo "<u><a href=mailreader.php?mailid=".$mailid[$x].">Change mail read status to read.</a><br>";

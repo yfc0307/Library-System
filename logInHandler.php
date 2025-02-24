@@ -20,12 +20,9 @@ if ($result->num_rows > 0) {
     if (password_verify($password_input, $stored_hash)) {
         // 密碼匹配，登入成功
         $_SESSION['userName'] = $row['username'];
-        echo "Login successful! Welcome, </br><a type='submit'  class='btn btn-primary btn-block' role='button' href='mailsender.php'>Go to HomePage</a>" . $row['username'];
+        header('Location: mailsender.php');
+        exit;
     } else {
-        // Debug
-        echo    "Password Input: ", $password_input, "</br>", 
-                "Hash: ", $stored_hash, "</br>";
-        // Debug
         echo "Incorrect password.</br><a type='submit'  class='btn btn-primary btn-block' role='button' href='javascript:history.go(-1)'>Go Back</a>";
     }
 } else {

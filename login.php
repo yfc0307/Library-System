@@ -1,139 +1,202 @@
-
 <?php
 session_start();
 include "db.php";
-$k = $_SESSION['userName'];
+if ($_SESSION) {
+    $k = $_SESSION['userName'];
+} else {
+    $k = "";
+}
+$sql = "select count(*) from mail m, users u where m.receiverid = u.userid and u.username = '$k' and m.mread = '0'";
 ?>
 
-
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-      <title>Title</title>
-      <!-- Required meta tags -->
-      <meta charset="utf-8" />
-      <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1, shrink-to-fit=no"
-      />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Times New Roman', Times, serif;
+        }
 
-      <!-- Bootstrap CSS v5.2.1 -->
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"  rel="stylesheet"  integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"  crossorigin="anonymous"/>
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    </head>
+        .nav-bar {
+            background-color: #009bff;
+            height: 120px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;          
+        }
 
-    <body>
-        <header>
-            <!-- place navbar here -->
-            <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-      <a class="navbar-brand" href="homepage.php">Library System</a>
-        <button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation"></button>
-        <div class="collapse navbar-collapse" id="collapsibleNavId">
-          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item active"><a class="nav-link" href="homepage.php">Home <span class="sr-only">(current)</span></a></li>
-              <li class="nav-item"></li>
-          </ul>
+        .logo {
+            color: white;
+            font-size: 36px;
+        }
+
+        .nav-list {
+            display: flex;
+            gap: 40px;
+        }
+
+        .nav-item {
+            color: white;
+            font-size: 24px;
+            text-decoration: none;
+            padding: 10px 20px;
+        }
+
+        .nav-item:hover {
+            background-color: rgba(255, 255, 255, 0.25)
+        }
+
+        .search-section {
+            padding: 100px 5%;
+            text-align: center;
+        }
+
+        .search-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 15px;
+            background-color: white;
+            padding: 15px;
+            border-radius: 50px;
+            box-shadow: 0  12px 18px rgba(0,0,0,0.1);
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 10px 20px;
+            border: none;
+            font-size: 24px;
+            outline: none;
+        }
+
+        .search-button {
+            background-color: #009bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 24px;
+        }
+
+        .search-button:hover {
+            background-color: #0084d6;
+        }
+
+        .login-section {
+            padding: 100px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .login-container {
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 12px 18px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .form-label {
+            font-size: 24px;
+        }
+
+        .form-input {
+            padding: 15px 25px;
+            font-size: 24px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            outline: none;
+        }
+
+        .form-input:focus {
+            border-color: #009bff;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 20px;
+        }
+
+        .login-button {
+            background-color: #009bff;
+            color: white;
+            width: 160px;
+            height: 60px;
+            font-size: 24px;
+        }
+
+        .reset-button {
+            background-color: #009bff;
+            color: white;
+            width: 160px;
+            height: 60px;
+            font-size: 24px;
+        }
+
+
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="nav-bar">
+        <div class="logo">Library Borrowing System</div>
+        <div class="nav-list">
+            <a href="homepage.php" class="nav-item">Home</a>
+            <?php 
+                if($k != null){ ?>
+                <a href="mailpage.php" class="nav-item">Mail</a>
+            <?php }?>
             <?php if( isset($_SESSION['userName']) && !empty($_SESSION['userName'])){?>
-                <ul class='navbar-nav navbar-right'><li class='nav-item'><a class='nav-link' href=logout.php>Log Out</a></li></ul>
-               
+                <a href="logout.php" class="nav-item">Logout</a>
             <?php }else{ ?>
-              <ul class='navbar-nav navbar-right'>
-                <li class='nav-item'><a href='signup.php' class='nav-link'>Sign Up</a></li>
-         
-                </ul>
-            <?php } ?>
-            
-            
-
+                <a href="login.php" class="nav-item">Login</a>
+                <a href="signup.php" class="nav-item">Sign Up</a>
+                <?php } ?>
         </div>
-</nav>
+    </nav>
 
-        </header>
-        <main>
-
-        <section class="text-center">
-  <!-- Background image -->
-        <div class="p-5 bg-image" style="
-            background-image: url('https://mdbootstrap.com/img/new/textures/full/171.jpg');
-            height: 275px;">
-        </div>
-  <!-- Background image -->
-
-  <div class="card mx-4 mx-md-4 shadow-5-strong bg-body-tertiary" style="
-        margin-top: -50px;
-        backdrop-filter: blur(30px);
-        ">
-    <div class="card-body py-5 px-md-5">
-
-      <div class="row d-flex justify-content-center">
-        <div class="col-lg-6">
-          <h2 class="fw-bold mb-5">Login</h2>
-
-          <form action="logInHandler.php" class="needs-validation" method="post">
-        
-            <div class="row">
-              <div class="form-group">
-                <div data-mdb-input-init class="form-outline">
-                <label class="form-label" for="userName">User Name :</label>
-                  <input type="text" class="form-control" placeholder="Enter user name" name="userName" required/>               
+    <section class="login-section">
+        <div class="login-container">
+            <form action="logInHandler.php" class="login-form" method="post">
+                <div class="form-group">
+                    <lable class="form-label">Username</lable>
+                    <input type="text" class="form-input" placeholder="Enter username" name="userName" required>                    
                 </div>
-              </div>            
-            </div>
+                <div class="form-group">
+                    <lable class="form-label">Password</lable>
+                    <input type="text" class="form-input" placeholder="Enter password" name="password" required>
+                </div>
+                <div class="button-group">
+                    <button type="submit" class="login-button">Login</button>
+                    <button type="reset" class="reset-button" value="Reset">Reset</button>
+                </div>
 
-          
-
-            <!-- Password input -->
-            <div class="form-group">
-                <label for="password">Password :</label>
-                <input type="password" class="form-control"  placeholder="Enter password" name="password" required/>
-               
-            </div>
-
-            
-            
-            
-            <!-- Submit button -->
-            <button type="submit" class="btn btn-primary" name="login" value="Login">Login</button>
-            <button type="reset" class="btn btn-danger" value="Reset">Reset</button>
-
-            <br><br><a href="signup.php">Click to sign up</a><br>
-
-          </form>
+                <br><br><a href="signup.php">Click here to sign up</a><br>
+            </form>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-
-
-
-
-
-
-        </main>
-        <footer>
-            <!-- place footer here -->
-        </footer>
-        <!-- Bootstrap JavaScript Libraries -->
-        <script
-            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-            crossorigin="anonymous"
-        ></script>
-
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-            integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-            crossorigin="anonymous"
-        ></script>
-
-       
-
-
-
-
-    </body>
+    </section>
+</body>
 </html>

@@ -36,7 +36,16 @@ foreach ($borrowid as $id) {
     $sql_mailsender = "insert into mail (senderid, receiverid, title, content) values ('0', '$userid[0]', 'Book Return Reminder', '$mailmsg')";
 }
 
-$query = mysqli_query($conn,$sql_mailsender);
+////////// The following codes are yet tested (24/2/2025) //////////
+
+// Prevent sending multiple same mail when user login multiple times within a day
+
+$sql_checkmail = "select count(*) from mail m, users u where m.receiverid = u.userid and m.content = '$mailmsg'"; // Check if exist same content mail
+if (mysqli_query($conn,$sql_checkmail) == 0) {
+    $query = mysqli_query($conn,$sql_mailsender);
+}
 header('Location: homepage.php');
 exit;
+
+////////// The above codes are yet tested (24/2/2025) //////////
 ?>

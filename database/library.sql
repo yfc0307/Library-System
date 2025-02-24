@@ -4,7 +4,6 @@
 --
 -- Host: 127.0.0.1
 -- Generation Time: Feb 23, 2025 at 07:50 AM
-
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -90,7 +89,6 @@ INSERT INTO `mail` (`mailid`, `senderid`, `receiverid`, `title`, `content`, `mre
 (3, 0, 1, 'Book Return Reminder', 'Your book no. 1 returning date will expire in 7 days. Please return before 2025-03-02', 1),
 (4, 0, 1, 'Book Return Reminder', 'Your book no. 1 returning date will expire in 7 days. Please return before 2025-03-02', 1),
 (5, 0, 1, 'Book Return Reminder', 'Your book no. 1 returning date will expire in 7 days. Please return before 2025-03-02', 1);
-
 
 -- --------------------------------------------------------
 

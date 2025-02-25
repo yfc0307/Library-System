@@ -5,6 +5,8 @@ $selected_mail = $_GET['mailid'];
 $k=$_SESSION['userName'];
 $sql = "select * from mail m, users u where m.receiverid = u.userid and u.username = '$k'";
 $result = mysqli_query($conn,$sql);
+$previousPage = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '';
+
 while ($row = mysqli_fetch_array($result)) {
 
     $mailid[] = $row["mailid"];
@@ -21,13 +23,17 @@ $sqlunread = "update mail set mread = 0 where mailid = '$selected_mail'";
 
 if ($mread[$selected_mail - 1] == 0) {
     $query = mysqli_query($conn,$sqlread);
-    header('Location: mailpage.php');
-    exit;
 } elseif ($mread[$selected_mail - 1] == 1) {
     $query = mysqli_query($conn,$sqlunread);
-    header('Location: mailpage.php');
-    exit;
 } else {
-    echo "Something went wrong."."<br>"."<u><a href=mailpage.php>Go Back.</a><br>";;
+    echo "Something went wrong."."<br>"."<u><a href=javascript:history.go(-1)>Go Back.</a><br>";;
 }
+
+if (strpos($previousPage, 'mail.php') !== false) {
+    header('Location: mail.php');
+} else {
+    header('Location: mailpage.php');
+}
+
+exit;
 ?>

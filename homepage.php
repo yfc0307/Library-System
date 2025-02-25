@@ -154,10 +154,12 @@ $sql = "select count(*) from mail m, users u where m.receiverid = u.userid and u
     <!-- Search -->
     <section class="search-section">
         <div class="search-container">
+        <form action="searchresult.php" method="GET">
             <div class="search-box">
-                <input type="text" class="search-input" placeholder="Search by title, author or ISBN...">
-                <button class="search-button">Search</button>
+                <input type="text" class="search-input" placeholder="Search by title, author or ISBN..." name="search">
+                <button type="submit" class="search-button" action="searchresult.php">Search</button>
             </div>
+            </form>
         </div>
     </section>
 

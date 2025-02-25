@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 23, 2025 at 07:50 AM
+-- Generation Time: Feb 26, 2025 at 12:03 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -41,7 +41,8 @@ CREATE TABLE `books` (
 --
 
 INSERT INTO `books` (`bookid`, `name`, `genre`, `author`, `publisher`, `language`) VALUES
-(1, 'Bocchi the Rock!', 'Comic', 'Aki Hamazi', 'Houbunsha', 'English');
+(1, 'Bocchi the Rock!', 'Comic', 'Aki Hamazi', 'Houbunsha', 'English'),
+(2, 'YuruYuri', 'Comic', 'Namori', 'Ichijinsha', 'English');
 
 -- --------------------------------------------------------
 
@@ -88,7 +89,9 @@ INSERT INTO `mail` (`mailid`, `senderid`, `receiverid`, `title`, `content`, `mre
 (2, 0, 1, 'Mail 2 to jack', 'Content of mail 2', 1),
 (3, 0, 1, 'Book Return Reminder', 'Your book no. 1 returning date will expire in 7 days. Please return before 2025-03-02', 1),
 (4, 0, 1, 'Book Return Reminder', 'Your book no. 1 returning date will expire in 7 days. Please return before 2025-03-02', 1),
-(5, 0, 1, 'Book Return Reminder', 'Your book no. 1 returning date will expire in 7 days. Please return before 2025-03-02', 1);
+(5, 0, 1, 'Book Return Reminder', 'Your book no. 1 returning date will expire in 7 days. Please return before 2025-03-02', 1),
+(6, 0, 1, 'Book Return Reminder', 'Your book no. 1 returning date will expire in 6 days. Please return before 2025-03-02', 1),
+(7, 0, 1, 'Book Return Reminder', 'Your book no. 1 returning date will expire in 5 days. Please return before 2025-03-02', 1);
 
 -- --------------------------------------------------------
 
@@ -112,7 +115,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`userid`, `username`, `password`, `dob`, `phone`, `email`) VALUES
 (1, 'jack', '$2y$10$nVr29KasbpaRMbw085YI9Otoml5nDjl50126vTjpOT.WVuBFgjyGa', NULL, '12345555', 'jack123@mail.com'),
 (2, 'jerry', '$2y$10$bvmKctm1LpJKl3XkG/EEf.iMhhP1pNllCCdFQkEgOV4NSeWfA5YWG', NULL, '12345678', 'jerry@mail.com'),
-(3, 'wilson', '$2y$10$rBQdozUfdiaq1NG2hi0gH.AXh6Vx1Z3cnpiHQ4ZPDficmUFQ0qkB2', '2025-10-16', '99991111', 'wilson123@mail.com');
+(3, 'wilson', '$2y$10$rBQdozUfdiaq1NG2hi0gH.AXh6Vx1Z3cnpiHQ4ZPDficmUFQ0qkB2', '2025-10-16', '99991111', 'wilson123@mail.com'),
+(4, 'henry', '$2y$10$yemHRTifn6fScU/bjyFCaeTmKQM1vohy.rVxxbYtg/k2TAphNjxCK', '0000-00-00', '99991111', '123@a.com');
 
 --
 -- Indexes for dumped tables
@@ -151,7 +155,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `books`
 --
 ALTER TABLE `books`
-  MODIFY `bookid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `bookid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `borrow`
@@ -163,13 +167,13 @@ ALTER TABLE `borrow`
 -- AUTO_INCREMENT for table `mail`
 --
 ALTER TABLE `mail`
-  MODIFY `mailid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `mailid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

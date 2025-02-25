@@ -121,7 +121,7 @@ $sql = "select count(*) from mail m, users u where m.receiverid = u.userid and u
             <a href="homepage.php" class="nav-item">Home</a>
             <?php 
                 if($k != null){ ?>
-                <a href="mailpage.php" class="nav-item">Mail</a>
+                <a href="mail.php" class="nav-item">Mail</a>
             <?php }?>
             <?php if( isset($_SESSION['userName']) && !empty($_SESSION['userName'])){?>
                 <a href="logout.php" class="nav-item">Logout</a>

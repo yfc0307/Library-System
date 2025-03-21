@@ -151,7 +151,7 @@ while ($row = mysqli_fetch_array($result)) {
         <div class="nav-list">
             <a href="homepage.php" class="nav-item">Home</a>
             <a href="mailpage.php" class="nav-item">Mailbox</a>
-            <a href="UserInfoPage.html" class="nav-item">User</a>
+            <a href="userinfo.php" class="nav-item">User</a>
             <a href="logout.php" class="nav-item">Logout</a>
         </div>
     </div>
@@ -180,10 +180,9 @@ while ($row = mysqli_fetch_array($result)) {
                 <tbody id="resultsBody">
                     <!-- Dynamic search results will be added here -->                    
                     <?php $count_book = 0;
-
+                    $x_book = 0;
                     if ($bookid){
                         foreach ($bookid as $id) {
-                            $x_book = 0; // independent counter
                             ?><tr>
                             <td><?php echo $bookid[$x_book] ?></td>
                             <td><?php echo $bookname[$x_book] ?></td>

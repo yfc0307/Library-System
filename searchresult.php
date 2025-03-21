@@ -161,7 +161,7 @@ while ($row = mysqli_fetch_array($result)) {
         <div class="search-container">
         <form action="searchresult.php" method="GET">
             <div class="search-box">
-                <input type="text" class="search-input" placeholder="Search by Book Name" name="search">
+                <input type="text" class="search-input" placeholder="Search by Book Title" name="search">
                 <button type="submit" class="search-button" action="searchresult.php">Search</button>
             </div>
             </form>
@@ -172,7 +172,7 @@ while ($row = mysqli_fetch_array($result)) {
                 <thead>
                     <tr>
                         <th>BookID</th>
-                        <th>Name</th>
+                        <th>Title</th>
                         <th>Author</th>
                         <th>Availability</th>
                     </tr>

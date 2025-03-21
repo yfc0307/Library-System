@@ -7,6 +7,13 @@ $sql = "select * from mail m, users u where m.receiverid = u.userid and u.userna
 $result = mysqli_query($conn,$sql);
 $numOfRecord = mysqli_num_rows($result);
 
+$mailid = array();
+$senderid = array();
+$receiverid = array();
+$title = array();
+$content = array();
+$mread = array();
+
 if($numOfRecord <= 0) {
     echo "<tr><td>NO data found</td> </tr>";
 } else {

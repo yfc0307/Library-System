@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 26, 2025 at 12:03 AM
+-- Generation Time: Mar 21, 2025 at 11:53 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -55,15 +55,16 @@ CREATE TABLE `borrow` (
   `userid` int(8) NOT NULL,
   `bdate` date NOT NULL DEFAULT current_timestamp() COMMENT 'borrow date',
   `rdate` date NOT NULL COMMENT 'return date',
-  `bookid` int(20) NOT NULL
+  `bookid` int(20) NOT NULL,
+  `returned` int(1) NOT NULL DEFAULT 0 COMMENT '0 = no, 1 = yes'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `borrow`
 --
 
-INSERT INTO `borrow` (`borrowid`, `userid`, `bdate`, `rdate`, `bookid`) VALUES
-(1, 1, '2025-02-23', '2025-03-02', 1);
+INSERT INTO `borrow` (`borrowid`, `userid`, `bdate`, `rdate`, `bookid`, `returned`) VALUES
+(1, 1, '2025-02-23', '2025-03-02', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -77,21 +78,9 @@ CREATE TABLE `mail` (
   `receiverid` int(8) NOT NULL,
   `title` varchar(255) DEFAULT NULL,
   `content` varchar(10000) NOT NULL,
-  `mread` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0 for unread, 1 for read'
+  `mread` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0 for unread, 1 for read',
+  `maildate` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `mail`
---
-
-INSERT INTO `mail` (`mailid`, `senderid`, `receiverid`, `title`, `content`, `mread`) VALUES
-(1, 0, 1, 'Mail 1 to jack', 'content of mail 1', 1),
-(2, 0, 1, 'Mail 2 to jack', 'Content of mail 2', 1),
-(3, 0, 1, 'Book Return Reminder', 'Your book no. 1 returning date will expire in 7 days. Please return before 2025-03-02', 1),
-(4, 0, 1, 'Book Return Reminder', 'Your book no. 1 returning date will expire in 7 days. Please return before 2025-03-02', 1),
-(5, 0, 1, 'Book Return Reminder', 'Your book no. 1 returning date will expire in 7 days. Please return before 2025-03-02', 1),
-(6, 0, 1, 'Book Return Reminder', 'Your book no. 1 returning date will expire in 6 days. Please return before 2025-03-02', 1),
-(7, 0, 1, 'Book Return Reminder', 'Your book no. 1 returning date will expire in 5 days. Please return before 2025-03-02', 1);
 
 -- --------------------------------------------------------
 
@@ -167,7 +156,7 @@ ALTER TABLE `borrow`
 -- AUTO_INCREMENT for table `mail`
 --
 ALTER TABLE `mail`
-  MODIFY `mailid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `mailid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `users`

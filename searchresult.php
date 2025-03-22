@@ -1,6 +1,10 @@
 <?php
 session_start();
-$k = $_SESSION['userName'];
+if ($_SESSION) {
+    $k = $_SESSION['userName'];
+} else {
+    $k = "";
+}
 include "db.php";
 
 $search = $_GET["search"];
